@@ -2,50 +2,14 @@ name: CI Pipeline
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build-and-test:
-    name: Build & Test on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ ubuntu-latest, macos-latest ]
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Show Git info
-        run: |
-          git --version
-          git log -1 --oneline
-
-      - name: Make script executable
-        run: chmod +x scripts/healthcheck.sh
-
-      - name: Run health check script
-        run: ./scripts/healthcheck.sh
-
-      - name: ShellCheck lint
-        uses: ludeeus/action-shellcheck@master
-        with:
-          scandir: './scripts'name: CI Pipeline
-
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
-jobs:
-  build-and-test:
-    name: Build & Test on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ ubuntu-latest, macos-latest ]
+    name: Build and Test
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
